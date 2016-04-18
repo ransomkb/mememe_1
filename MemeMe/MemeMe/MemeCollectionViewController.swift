@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeCollectionViewController: UICollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class MemeCollectionViewController: UICollectionViewController {
     
     // Model: create an array of memes.
     var memes: [Meme]!

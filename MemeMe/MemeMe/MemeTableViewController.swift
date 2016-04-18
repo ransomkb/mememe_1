@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class MemeTableViewController: UITableViewController {
     
     // Model: create an array of memes.
     var memes: [Meme]!
@@ -49,7 +49,7 @@ class MemeTableViewController: UITableViewController, UITableViewDataSource, UIT
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Dequeue a cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("TableCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TableCell")! as UITableViewCell
         
         // Get the meme from the array.
         let meme = self.memes[indexPath.row]

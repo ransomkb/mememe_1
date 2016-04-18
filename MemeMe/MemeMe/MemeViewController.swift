@@ -39,13 +39,13 @@ class MemeViewController: UIViewController {
     
     @IBAction func trashMeme(sender: UIBarButtonItem) {
         // Unwrap the optional.
-        if let slot = self.memeNumber {
+        if (self.memeNumber) != nil {
             // Access the application-wide array of memes and remove it
             let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
             applicationDelegate.memes.removeAtIndex(self.memeNumber)
             
             // Return to root view controller, either Table or Collection
-            let controller = self.navigationController!.viewControllers[0] as! UIViewController
+            _ = self.navigationController!.viewControllers[0] 
             self.navigationController!.popToRootViewControllerAnimated(true)
         }
     }

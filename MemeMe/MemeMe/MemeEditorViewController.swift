@@ -44,7 +44,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillAppear(animated)
         
         // Hide share button until meme has an image.
-        if let image = imagePickerView.image {
+        if (imagePickerView.image) != nil {
             shareMemeButton.enabled = true
         } else {
             shareMemeButton.enabled = false
@@ -129,11 +129,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func saveMeme() {
         // Ensure text fields are not empty.
-        if self.topTextField.text.isEmpty {
+        if self.topTextField.text!.isEmpty {
             self.topTextField.text = ""
         }
         
-        if self.bottomTextField.text.isEmpty {
+        if self.bottomTextField.text!.isEmpty {
             self.bottomTextField.text = ""
         }
         
@@ -167,7 +167,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func goToHeadOfTheLine() {
         // Instantiate a controller and pop to the root view controller.
-        let controller = self.navigationController!.viewControllers[0] as! UIViewController
+        let controller = self.navigationController!.viewControllers[0]
         self.navigationController!.popToViewController(controller, animated: true)
     }
     
@@ -195,7 +195,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     // Assign the selected image to self image picker view, then dismiss the image picker controller.
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imagePickerView.image = image
         }
@@ -231,8 +232,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Subscribe to keyboard notifications to show and hide the keyboard appropriately.
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     // Unsubscribe from keyboard notifications when segueing to another view controller.
